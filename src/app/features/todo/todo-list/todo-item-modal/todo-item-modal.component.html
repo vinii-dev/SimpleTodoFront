@@ -1,0 +1,58 @@
+<p-dialog
+  header="{{ isEditMode ? 'Editar Tarefa' : 'Adicionar Tarefa' }}"
+  [(visible)]="isModalVisible"
+  [modal]="true"
+  styleClass="w-xl h-xl"
+  (onHide)="closeModal()"
+>
+  <form (ngSubmit)="confirm()" #todoForm="ngForm">
+    <div class="space-y-4 mb-4">
+      <div class="flex flex-col gap-2">
+        <label for="title">Título</label>
+        <input
+          id="title"
+          type="text"
+          pInputText
+          name="title"
+          [(ngModel)]="todoItem.title"
+          required
+          [ngClass]="{
+            'p-invalid': todoForm.submitted && !todoItem.title
+          }"
+        />
+        <p-message  *ngIf="todoForm.submitted && !todoItem.title" class="p-error" severity="error" variant="simple" size="small">
+          Título é obrigatório
+        </p-message>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label for="description">Descrição</label>
+        <textarea
+          id="description"
+          rows="4"
+          pTextarea
+          name="description"
+          [(ngModel)]="todoItem.description"
+          required
+          [ngClass]="{
+            'p-invalid': todoForm.submitted && !todoItem.description
+          }"
+        ></textarea>
+        <p-message  *ngIf="todoForm.submitted && !todoItem.description" class="p-error" severity="error" variant="simple" size="small">
+          Descrição é obrigatório
+        </p-message>
+      </div>
+    </div>
+
+    <p-footer class="space-x-2">
+      <button pButton label="Salvar" [disabled]="loading$ | async"></button>
+      <button
+        pButton
+        type="button"
+        class="p-button-secondary"
+        label="Cancelar"
+        (click)="closeModal()"
+      ></button>
+    </p-footer>
+  </form>
+</p-dialog>

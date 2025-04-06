@@ -1,0 +1,36 @@
+<div class="space-y-4">
+  <div class="mb-4">
+    <p-button label="Adicionar nova Tarefa" (onClick)="openModal(null)" />
+  </div>
+
+  @for (item of todos$ | async; track item.id) {
+    <app-todo-item
+      [todoItem]="item"
+      (onEdit)="handleEdit(item)"
+      (onRemove)="handleRemove(item)"
+      (onToggle)="handleToggle(item)"
+    >
+    </app-todo-item>
+  }
+
+  <div>
+    @let pagination = pagination$ | async;
+    <p-paginator
+      (onPageChange)="onPageChange($event)"
+      [rows]="pagination?.size"
+      [totalRecords]="pagination?.totalCount"
+      [showCurrentPageReport]="true"
+      [showPageLinks]="true"
+      currentPageReportTemplate="Exibindo itens {first} a {last} de um total de {totalRecords}"
+    />
+  </div>
+</div>
+
+<app-todo-item-modal
+  [todoItem]="currentTodoItem"
+  [isModalVisible]="isModalVisible"
+  [isEditMode]="!!currentTodoItem.id"
+  (onClosed)="onModalClosed()"
+></app-todo-item-modal>
+
+<p-confirmDialog></p-confirmDialog>

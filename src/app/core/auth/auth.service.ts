@@ -15,7 +15,6 @@ export class AuthService {
   }
 
   register(username: string, password: string): Observable<void> {
-    console.log(this.http);
     return this.http.post<void>(environment.baseUrl + '/auth/register', { username, password });
   }
 }

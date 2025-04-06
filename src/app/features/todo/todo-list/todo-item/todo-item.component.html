@@ -1,0 +1,53 @@
+<div
+  class="flex justify-between items-center p-4 border rounded-xl shadow-sm hover:shadow-md transition bg-white"
+  [ngClass]="{
+    'border-gray-300': todoItem.isCompleted,
+    'border-primary-100': !todoItem.isCompleted,
+    'opacity-70': todoItem.isCompleted,
+    '!bg-surface-50': todoItem.isCompleted
+  }"
+>
+  <div class="flex items-center gap-3 w-full">
+    <p-checkbox
+      [(ngModel)]="todoItem.isCompleted"
+      binary
+      (onChange)="onToggle.emit()"
+      size="large"
+      styleClass="mt-1"
+    ></p-checkbox>
+
+    <div class="flex flex-col w-full">
+      <small class="text-xs text-gray-400 mt-1 select-none">
+        Criado em {{ todoItem.createdAt | date: 'dd/MM/yyyy HH:mm' }}
+      </small>
+      <h2
+        class="font-semibold text-base"
+        [ngClass]="{ 'line-through text-gray-400': todoItem.isCompleted }"
+      >
+        {{ todoItem.title }}
+      </h2>
+      <p
+        class="text-sm text-gray-600"
+        [ngClass]="{ 'line-through': todoItem.isCompleted }"
+      >
+        {{ todoItem.description }}
+      </p>
+    </div>
+  </div>
+
+  <div class="flex gap-2 items-center ml-4 h-full">
+    <button
+      pButton
+      icon="pi pi-pencil"
+      (click)="onEdit.emit()"
+      aria-label="Edit"
+    ></button>
+    <button
+      pButton
+      icon="pi pi-trash"
+      (click)="onRemove.emit()"
+      severity="danger"
+      aria-label="Delete"
+    ></button>
+  </div>
+</div>

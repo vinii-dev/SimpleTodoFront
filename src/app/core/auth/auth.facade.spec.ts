@@ -44,7 +44,7 @@ describe('AuthFacade with Jest', () => {
   });
 
   it('should register then login successfully', (done) => {
-    authServiceMock.register.mockReturnValue(of());
+    authServiceMock.register.mockReturnValue(of(undefined));
     authServiceMock.login.mockReturnValue(of(loginResponse));
 
     facade.register('user', 'pass').subscribe((res) => {

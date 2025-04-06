@@ -9,6 +9,7 @@ import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@a
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 import { MessageService } from 'primeng/api';
 import { TokenInterceptor } from './core/interceptors/token.interceptor';
+import { DATE_PIPE_DEFAULT_OPTIONS } from '@angular/common';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,12 +21,13 @@ export const appConfig: ApplicationConfig = {
     ),
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: DATE_PIPE_DEFAULT_OPTIONS, useValue: { timezone: '-3000' } },
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {
         preset: Aura,
         options: {
-            darkModeSelector: false || 'none'
+          darkModeSelector: false || 'none'
         }
       },
     }),

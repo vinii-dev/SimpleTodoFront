@@ -10,7 +10,6 @@ export class ErrorInterceptor implements HttpInterceptor {
   messageService = inject(MessageService);
 
   intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    console.log('oh my gah');
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
         const translatedMessage = this.getErrorMessage(error);
