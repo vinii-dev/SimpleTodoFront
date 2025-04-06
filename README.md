@@ -11,7 +11,7 @@ Os componentes do projeto foram criados utilizando a biblioteca [PrimeNG](https:
 Clone o projeto
 
 ```bash
-  git clone https://link-para-o-projeto
+  git clone https://github.com/vinii-dev/simpletodofront
 ```
 
 Entre no diretório do projeto
