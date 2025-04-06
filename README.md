@@ -17,7 +17,7 @@ Clone o projeto
 Entre no diretório do projeto
 
 ```bash
-  cd my-project
+  cd SimpleTodoFront
 ```
 
 Instale as dependências
