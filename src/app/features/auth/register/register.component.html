@@ -1,0 +1,97 @@
+<div class="w-screen h-screen flex items-center justify-center">
+  <p-card header="Registrar" class="w-md text-center">
+    <ng-template #title>
+      Criar uma Conta
+    </ng-template>
+
+    <p-divider></p-divider>
+
+    <form class="text-start space-y-4" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="flex flex-col gap-2">
+        <label for="username">Nome de Usuário</label>
+        <input
+          pInputText
+          id="username"
+          formControlName="username"
+          type="text"
+          placeholder="Escolha um nome de usuário"
+          [ngClass]="{
+            'p-invalid': registerForm.get('username')?.invalid
+              && (registerForm.get('username')?.dirty || registerForm.get('username')?.touched)
+          }"
+        />
+
+        @if (registerForm.get('username')?.invalid && (registerForm.get('username')?.dirty
+        || registerForm.get('username')?.touched)) {
+          @if (registerForm.get('username')?.errors?.['required']) {
+            <p-message severity="error" variant="simple" size="small">Nome de usuário é obrigatório</p-message>
+          }
+        }
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label for="password">Senha</label>
+        <input
+          pInputText
+          id="password"
+          formControlName="password"
+          type="password"
+          placeholder="Crie uma senha"
+          [ngClass]="{
+            'p-invalid': registerForm.get('password')?.invalid
+              && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)
+          }"
+        />
+
+        @if (registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty
+        || registerForm.get('password')?.touched)) {
+          @if (registerForm.get('password')?.errors?.['required']) {
+            <p-message severity="error" variant="simple" size="small">Senha é obrigatória</p-message>
+          }
+          @if (registerForm.get('password')?.errors?.['minlength']) {
+            <p-message severity="error" variant="simple" size="small">A senha deve ter pelo menos 6 caracteres</p-message>
+          }
+        }
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label for="confirmPassword">Confirmar Senha</label>
+        <input
+          pInputText
+          id="confirmPassword"
+          formControlName="confirmPassword"
+          type="password"
+          placeholder="Confirme sua senha"
+          [ngClass]="{
+            'p-invalid': registerForm.get('confirmPassword')?.invalid
+              && (registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched)
+          }"
+        />
+
+        @if (registerForm.get('confirmPassword')?.invalid && (registerForm.get('confirmPassword')?.dirty
+        || registerForm.get('confirmPassword')?.touched)) {
+          @if (registerForm.get('confirmPassword')?.errors?.['required']) {
+            <p-message severity="error" variant="simple" size="small">Por favor, confirme sua senha</p-message>
+          }
+        }
+        @if (registerForm.errors?.['mismatch']) {
+          <p-message severity="error" variant="simple" size="small">As senhas não coincidem</p-message>
+        }
+      </div>
+
+      <p-button
+        type="submit"
+        [loading]="loading"
+        styleClass="block w-full"
+        label="Registrar"
+      ></p-button>
+
+      <p-divider></p-divider>
+
+      <div class="text-center">
+        Já tem uma conta?
+        <a routerLink="/login" class="text-primary">Faça login aqui</a>
+      </div>
+    </form>
+  </p-card>
+</div>
